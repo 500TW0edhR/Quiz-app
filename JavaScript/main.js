@@ -90,14 +90,20 @@ function resetState() {
 
 // 解答が選択された時の処理
 function selectAnswer(e) {
+    const judgment = document.getElementById("judgment");
     const selectedBtn = e.target;
     const isCorrect = selectedBtn.dataset.correct === "true";
     if(isCorrect) {
         selectedBtn.classList.add("correct");
+        judgment.innerText = "正解";
+        // judgment.style.color = "#9aeabc";
+        judgment.style.color = "#34AF6D";
         score++;
     }
     else {
         selectedBtn.classList.add("incorrect");
+        judgment.innerText = "不正解";
+        judgment.style.color = "#ff9393";
     }
     // 各解答ボタンをループで処理
     // 正しければcorrectのクラス名を追加し他のボタンを選択不可にする
@@ -131,10 +137,12 @@ function handleNextButton() {
     if(currentQuestionIndex < questions.length) {
         // 次の質問を表示
         showQuestion();
+        judgment.innerText = "";
     }
     else {
         // 全ての質問が終了後に表示
         showScore();
+        judgment.innerText = "";
     }
 }
 
@@ -153,3 +161,4 @@ nextQuestion.addEventListener("click", () => {
 
 // 最初にクイズを開始する
 startQuiz();
+
